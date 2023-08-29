@@ -5,7 +5,7 @@ class AppTable extends HTMLTableElement {
     this.theadHTML = '';
     this.tbodyHTML = '';
 
-    console.log('list-table', this);
+    //console.log('list-table', this);
 
   }
   
@@ -18,7 +18,7 @@ class AppTable extends HTMLTableElement {
   }
 
   set thead(elements) {
-    console.log('elements thead', elements);
+    //console.log('elements thead', elements);
     elements?.forEach((item) => {
       this.theadHTML += item;
     });
@@ -26,7 +26,7 @@ class AppTable extends HTMLTableElement {
   }
 
   set tbody(elements) {
-    console.log('elements tbody', elements);
+    //console.log('elements tbody', elements);
     elements?.forEach((item) => {
       this.tbodyHTML += item;
     });
