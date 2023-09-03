@@ -2,14 +2,10 @@ class AppTable extends HTMLTableElement {
   constructor() {
     super();
 
-    this.theadHTML = '';
-    this.tbodyHTML = '';
-
-    //console.log('list-table', this);
+    this.insertAdjacentHTML('afterbegin', `<thead></thead>`);
+    this.insertAdjacentHTML('beforeend', `<tbody></tbody>`);
 
     var itemsTable = useState('tableItems');
-
-    console.log('table init itemsTable', itemsTable.value);
 
     useWatch((itemsTable) => {
       this.tbody = itemsTable.value;
@@ -26,19 +22,19 @@ class AppTable extends HTMLTableElement {
   }
 
   set thead(elements) {
-    //console.log('elements thead', elements);
+    let html = '';
     elements?.forEach((item) => {
-      this.theadHTML += item;
+      html += item;
     });
-    this.insertAdjacentHTML('afterbegin', `<thead><tr>${this.theadHTML}</tr></thead>`);
+    this.theadEl.innerHTML = html;
   }
 
   set tbody(elements) {
-    console.log('elements tbody', elements);
+    let html = '';
     elements?.forEach((item) => {
-      this.tbodyHTML += item;
+      html += item;
     });
-    this.insertAdjacentHTML('beforeend', `<tbody>${this.tbodyHTML}</tbody>`);
+    this.tbodyEl.innerHTML = html;
   }
 
 }

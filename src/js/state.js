@@ -3,23 +3,36 @@ window.__statesProxies__ = setState({});
 
 function useWatch(callback, proxies) {
   proxies.forEach((item) => {
-    item.watch = function() {
+    console.log('item.watch', item.watch);
+    item.watch = [...item.watch, function() {
       callback?.(...proxies);
-    }
+    }]
+    /*item.watch.forEach((push) => {
+      push();
+    })*/
   })
 }
 
 function setState(propsOrKey, props) {
 
   var handler = {
-    get: function (object, attr) {
-      return object[attr];
+    get: function (currentProps, attr) {
+      return currentProps[attr];
     },
-    set: function (object, attr, value) {
-      if (object[attr] !== value) {
-        object[attr] = value;
-        if (object.watch) {
-          object.watch?.(object);
+    set: function (currentProps, attr, value) {
+      if (currentProps[attr] !== value) {
+        currentProps[attr] = value;
+        if (currentProps.watch) {
+          console.log('currentProps', value);
+          /*console.log('currentProps', currentProps);
+          currentProps.watch.push(currentProps.watch.bind(undefined, currentProps));
+          currentProps.watch?.forEach((push) => {
+            push(currentProps);
+          })*/
+          currentProps.watch.forEach((push) => {
+            push(currentProps);
+          })
+          //currentProps.watch(currentProps);
         }
       }
       return true;
@@ -27,7 +40,8 @@ function setState(propsOrKey, props) {
   };
 
   var proxy = new Proxy({
-    value: props || propsOrKey
+    value: props || propsOrKey,
+    watch: []
   }, handler);
   
   if (props) {
