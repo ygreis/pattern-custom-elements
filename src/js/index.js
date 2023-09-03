@@ -19,8 +19,7 @@ class RootApp extends HTMLDivElement {
 
   proxy() {
 
-    let tableItems = setState({
-      value: [
+    let tableItems = setState('tableItems', [
         `<tr data-key="1" class="bg-secondary text-decoration-line-through">
           <td><input type="checkbox" name="todo-check" checked/></td>
           <td>Ir ao mercado</td>
@@ -40,11 +39,10 @@ class RootApp extends HTMLDivElement {
               <button type="button" class="btn btn-sm btn-danger">Excluir</button>
             </td>
           </tr>`,
-      ]
-    });
-    
+      ]);
+
     // Comente a linha de baixo para exibir o resultado acima.
-    tableItems.value = [
+    /*tableItems.value = [
       `<tr>
         <td></td>
         <td class="p-0"><input type="text" class="form-control w-100 b-none" style="height: 48px !important; box-shadow: none; border: none;"/></td>
@@ -53,13 +51,7 @@ class RootApp extends HTMLDivElement {
           <button type="button" class="btn btn-sm btn-danger">Excluir</button>
         </td>
       </tr>`
-    ]
-
-    useWatch((tableItems) => {
-
-      this.table.tbody = tableItems.value;
-
-    }, [tableItems])
+    ]*/
 
   }
 

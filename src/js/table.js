@@ -7,6 +7,14 @@ class AppTable extends HTMLTableElement {
 
     //console.log('list-table', this);
 
+    var itemsTable = useState('tableItems');
+
+    console.log('table init itemsTable', itemsTable.value);
+
+    useWatch((itemsTable) => {
+      this.tbody = itemsTable.value;
+    }, [itemsTable])
+
   }
   
   get theadEl() {
@@ -26,7 +34,7 @@ class AppTable extends HTMLTableElement {
   }
 
   set tbody(elements) {
-    //console.log('elements tbody', elements);
+    console.log('elements tbody', elements);
     elements?.forEach((item) => {
       this.tbodyHTML += item;
     });
